@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "ShortsFreeYT"
+    namespace = "com.stevepopovich.shortsfreeyt.android"
     compileSdk = 33
     defaultConfig {
         applicationId = "com.stevepopovich.shortsfreeyt.android"
-        minSdk = 21
+        minSdk = 26
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
