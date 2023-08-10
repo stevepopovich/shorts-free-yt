@@ -69,29 +69,25 @@ class MainActivity : ComponentActivity() {
                 }
             }
 
-            // Set User Agent
-            userAgent = System.getProperty("http.agent")
-            settings.userAgentString = userAgent + "ShortsFreeYT"
-
+            // Allows logging into YouTube via popup
             settings.javaScriptCanOpenWindowsAutomatically = true
             settings.setSupportMultipleWindows(true)
 
-            // WebView Tweaks
+            // Needed to load youtube fully
             settings.javaScriptEnabled = true
             settings.domStorageEnabled = true
+            // Needed to keep user logged into YouTube
             settings.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
 
             loadUrl(URL.YOUTUBE)
         }
 
-        // Enable Cookies
+        // Keeps logged into YouTube
         CookieManager.getInstance().setAcceptCookie(true)
         CookieManager.getInstance().setAcceptThirdPartyCookies(webView, true)
 
-        val controller = WindowInsetsControllerCompat(window, window.decorView)
-        controller.hide(WindowInsetsCompat.Type.systemBars())
-        controller.systemBarsBehavior =
-            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        // Hides
+
 
         webView.webChromeClient = CustomChromeWebClient(
             webView = webView,

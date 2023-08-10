@@ -15,6 +15,7 @@ class CustomWebView : WebView {
         context!!, attrs, defStyleAttr
     )
 
+    // Allows playing with the screen off
     override fun onWindowVisibilityChanged(visibility: Int) {
         if (visibility != GONE) super.onWindowVisibilityChanged(VISIBLE)
     }
