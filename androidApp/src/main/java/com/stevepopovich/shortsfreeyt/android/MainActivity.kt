@@ -41,20 +41,16 @@ class MainActivity : ComponentActivity() {
         webView = CustomWebView(this).apply {
             webViewClient = object : WebViewClient() {
                 override fun onPageFinished(view: WebView?, url: String?) {
+                    view?.evaluateJavascript(
+                        "var elements = this.document.getElementsByClassName(\"pivot-shorts\");while(elements.length > 0) elements[0].parentNode.removeChild(elements[0])"
+                    ) {}
+
+                    view?.evaluateJavascript(
+                        "var elements2 = document.getElementsByTagName(\"ytm-reel-shelf-renderer\");while (elements2[0]) elements2[0].parentNode.removeChild(elements2[0]);"
+                    ) {}
                     GlobalScope.launch {
-                        delay(1000)
-                        runOnUiThread {
-                            view?.evaluateJavascript(
-                                "var elements = this.document.getElementsByClassName(\"pivot-shorts\");while(elements.length > 0) elements[0].parentNode.removeChild(elements[0])"
-                            ) {}
-
-                            view?.evaluateJavascript(
-                                "var elements2 = document.getElementsByTagName(\"ytm-reel-shelf-renderer\");while (elements2[0]) elements2[0].parentNode.removeChild(elements2[0]);"
-                            ) {}
-                        }
-
                         while (true) {
-                            delay(300)
+                            delay(100)
                             runOnUiThread {
                                 view?.evaluateJavascript(
                                     "elements = this.document.getElementsByClassName(\"pivot-shorts\");while(elements.length > 0) elements[0].parentNode.removeChild(elements[0])"
@@ -85,9 +81,6 @@ class MainActivity : ComponentActivity() {
         // Keeps logged into YouTube
         CookieManager.getInstance().setAcceptCookie(true)
         CookieManager.getInstance().setAcceptThirdPartyCookies(webView, true)
-
-        // Hides
-
 
         webView.webChromeClient = CustomChromeWebClient(
             webView = webView,
