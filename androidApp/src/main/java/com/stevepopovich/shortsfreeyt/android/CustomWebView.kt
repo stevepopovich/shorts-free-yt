@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.webkit.WebView
 
 
-class MediaWebView : WebView {
+class CustomWebView : WebView {
     constructor(context: Context?) : super(context!!)
     constructor(context: Context?, attrs: AttributeSet?) : super(
         context!!, attrs

@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
 
         window.requestFeature(Window.FEATURE_NO_TITLE)
 
-        webView = MediaWebView(this).apply {
+        webView = CustomWebView(this).apply {
             webViewClient = object : WebViewClient() {
                 override fun onPageFinished(view: WebView?, url: String?) {
                     GlobalScope.launch {
@@ -92,6 +92,11 @@ class MainActivity : ComponentActivity() {
         controller.hide(WindowInsetsCompat.Type.systemBars())
         controller.systemBarsBehavior =
             WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+
+        webView.webChromeClient = CustomChromeWebClient(
+            webView = webView,
+            activity = this
+        )
 
         this.setContentView(webView)
     }
