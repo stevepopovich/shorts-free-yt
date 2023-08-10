@@ -42,7 +42,7 @@ class MainActivity : ComponentActivity() {
             webViewClient = object : WebViewClient() {
                 override fun onPageFinished(view: WebView?, url: String?) {
                     view?.evaluateJavascript(
-                        "var elements = this.document.getElementsByClassName(\"pivot-shorts\");while(elements.length > 0) elements[0].parentNode.removeChild(elements[0])"
+                        "var elements = this.document.getElementsByClassName(\"pivot-shorts\");while(elements.length > 0) elements[0].parentNode.parentNode.remove()"
                     ) {}
 
                     view?.evaluateJavascript(
@@ -50,10 +50,10 @@ class MainActivity : ComponentActivity() {
                     ) {}
                     GlobalScope.launch {
                         while (true) {
-                            delay(100)
+                            delay(10)
                             runOnUiThread {
                                 view?.evaluateJavascript(
-                                    "elements = this.document.getElementsByClassName(\"pivot-shorts\");while(elements.length > 0) elements[0].parentNode.removeChild(elements[0])"
+                                    "elements = this.document.getElementsByClassName(\"pivot-shorts\");while(elements.length > 0) elements[0].parentNode.remove()"
                                 ) {}
 
                                 view?.evaluateJavascript(
