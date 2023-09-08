@@ -27,17 +27,17 @@ So feel free to roast me about using Kotlin Multiplatform, but I just wanted to 
 
 ## Features
 
-✅ Shorts removed from the home screen and from the feed
-✅ Picture in Picture. (kind of)
-✅ Background playing.
-✅ Has many of the same core features as the native app. The YouTube web app is pretty good actually.
-✅ Keeps user logged in.
+- ✅ Shorts removed from the home screen and from the feed
+- ✅ Picture in Picture. (kind of)
+- ✅ Background playing.
+- ✅ Has many of the same core features as the native app. The YouTube web app is pretty good actually.
+- ✅ Keeps user logged in.
 
 ## Drawbacks
 
-😢 It's a web app. The look and feel isn't as good. It won't keep state as well.
-😢 Deleting the DOM elements is tricky and can cause flashing.
-😢 No video downloading. 
+- 😢 It's a web app. The look and feel isn't as good. It won't keep state as well. Behaviors are fundamentally different than native.
+- 😢 Deleting the DOM elements is tricky and can cause flashing.
+- 😢 No video downloading. 
 
 ## How to use
 
