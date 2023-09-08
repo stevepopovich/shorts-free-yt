@@ -18,7 +18,6 @@ import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     private lateinit var webView: WebView
-    private var userAgent: String? = null
 
     override fun onBackPressed() {
         if (webView.canGoBack()) {
@@ -36,8 +35,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        window.requestFeature(Window.FEATURE_NO_TITLE)
-
         webView = CustomWebView(this).apply {
             webViewClient = object : WebViewClient() {
                 override fun onPageFinished(view: WebView?, url: String?) {
@@ -48,18 +45,11 @@ class MainActivity : ComponentActivity() {
                     view?.evaluateJavascript(
                         "var elements2 = document.getElementsByTagName(\"ytm-reel-shelf-renderer\");while (elements2[0]) elements2[0].parentNode.removeChild(elements2[0]);"
                     ) {}
+
                     GlobalScope.launch {
                         while (true) {
-                            delay(10)
-                            runOnUiThread {
-                                view?.evaluateJavascript(
-                                    "elements = this.document.getElementsByClassName(\"pivot-shorts\");while(elements.length > 0) elements[0].parentNode.remove()"
-                                ) {}
-
-                                view?.evaluateJavascript(
-                                    "elements2 = document.getElementsByTagName(\"ytm-reel-shelf-renderer\");while (elements2[0]) elements2[0].parentNode.removeChild(elements2[0]);"
-                                ) {}
-                            }
+                            delay(100) // Time in MS to delay between checks
+                            deleteAllTheShorts(view)
                         }
                     }
                 }
@@ -88,5 +78,17 @@ class MainActivity : ComponentActivity() {
         )
 
         this.setContentView(webView)
+    }
+
+    private fun deleteAllTheShorts(view: WebView?) {
+        runOnUiThread {
+            view?.evaluateJavascript(
+                "elements = this.document.getElementsByClassName(\"pivot-shorts\");while(elements.length > 0) elements[0].parentNode.remove()"
+            ) {}
+
+            view?.evaluateJavascript(
+                "elements2 = document.getElementsByTagName(\"ytm-reel-shelf-renderer\");while (elements2[0]) elements2[0].parentNode.removeChild(elements2[0]);"
+            ) {}
+        }
     }
 }

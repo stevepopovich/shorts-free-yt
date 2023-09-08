@@ -19,12 +19,14 @@ class CustomChromeWebClient(
         activity.window.decorView
     )
 
+    // Hides system bars
     override fun onHideCustomView() {
         fullscreen?.visibility = View.GONE
         webView.visibility = View.VISIBLE
         controller.show(WindowInsetsCompat.Type.systemBars())
     }
 
+    // Allows playing in fullscreen
     override fun onShowCustomView(view: View, callback: CustomViewCallback?) {
         webView.visibility = View.GONE
         if (fullscreen != null) {
